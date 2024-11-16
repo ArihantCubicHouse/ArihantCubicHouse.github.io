@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unverified</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1499892990797-5f64b9e3fbd0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-in-out;
+            max-width: 90%; /* Ensure it doesn't exceed mobile screen width */
+        }
+        h1 {
+            color:#002b36;
+            font-size: 24px;
+            margin-bottom: 15px;
+            animation: slideIn 0.5s ease forwards;
+        }
+        p {
+            color:#002b36;
+            font-size: 16px;
+            margin-bottom: 20px;
+            animation: slideIn 0.7s ease forwards;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            background-color: #002b36;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: slideIn 0.9s ease forwards;
+        }
+        button:hover {
+            background-color: #ff3333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Media query for mobile devices */
+        @media (min-width: 768px) {
+            body {
+                display: none; /* Hide the page for larger screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>You Are Unverified</h1>
+        <p>Please come back later.</p>
+        <button onclick="window.location.reload();">Try Again</button>
+    </div>
+</body>
+</html>

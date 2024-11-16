@@ -1,0 +1,11 @@
+<script>
+// Function to remove a cookie by name
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+}
+
+// Usage example
+deleteCookie('id'); // This will remove the 'id' cookie
+deleteCookie('admin'); // This will remove the 'id' cookie
+    window.location.href = '/login';
+</script>

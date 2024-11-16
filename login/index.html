@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  // Function to get a cookie value by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Check if the 'id' cookie exists
+  if (getCookie('id')) {
+    window.location.href = '/'; // Redirect to /
+  }
+</script>
+<body>
+  <div class="login-container">
+    <div class="logo">
+      <!-- Logo area -->
+      <img src="https://via.placeholder.com/100" alt="Logo">
+    </div>
+    <h2>Welcome Back!</h2>
+    <p>Please login to your account</p>
+    <form id="login-form">
+      <div class="input-group">
+        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+    <div class="links">
+      <a href="#">Forgot Password?</a>
+      <span> | </span>
+      <a href="#">Create Account</a>
+    </div>
+  </div>
+  
+  <script src="script.js" type="module"></script>
+</body>
+</html>

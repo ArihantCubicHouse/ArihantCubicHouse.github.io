@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<script>
+  // Function to get a cookie value by name
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  // Check if the 'id' cookie exists
+  if (getCookie('id')) {
+    window.location.href = '/'; // Redirect to /
+  }
+</script>
+<body>
+  <div class="signup-container">
+    <div class="logo">
+      <img src="https://via.placeholder.com/100" alt="Logo">
+    </div>
+    <h2>Create Your Account</h2>
+    <p>Sign up to get started</p>
+    <form id="signup-form">
+      <div class="input-group">
+        <input type="text" id="full-name" placeholder="Full Name" required>
+      </div>
+      <div class="input-group">
+        <input type="tel" id="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+      </div>
+      <div class="input-group">
+        <input type="password" id="password" placeholder="Password" required>
+      </div>
+      <div class="input-group">
+        <input type="text" id="company-name" placeholder="Company Name (Optional)">
+      </div>
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+    <div class="links">
+      <a href="#">Already have an account? Log in</a>
+    </div>
+  </div>
+  
+  <!-- Firebase SDKs and SHA-256 encryption script -->
+  <script type="module">
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+  
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDZRW7hj5jtolyXijcMLG9QBnOvUZR5I-k",
+      authDomain: "arihantcubichouse1001.firebaseapp.com",
+      projectId: "arihantcubichouse1001",
+      storageBucket: "arihantcubichouse1001.appspot.com",
+      messagingSenderId: "916505919065",
+      appId: "1:916505919065:web:c9fe9cad2d0719d64ebb48",
+      measurementId: "G-XKW570TWQG"
+    };
+  
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+  
+    // Function to hash password using Web Crypto API
+    async function hashPassword(password) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hash = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+  
+    // Handle form submission
+    document.getElementById("signup-form").addEventListener("submit", async function(event) {
+      event.preventDefault();
+  
+      const fullName = document.getElementById("full-name").value;
+      const phone = document.getElementById("phone").value;
+      const password = document.getElementById("password").value;
+      const companyName = document.getElementById("company-name").value || "";
+  
+      // Encrypt the password using SHA-256
+      const encryptedPassword = await hashPassword(password);
+  
+      // Add user to Firestore with the phone number as the document ID
+      try {
+        await setDoc(doc(db, "users", phone), {
+          "Full Name": fullName,
+          "Phone Number": Number(phone),
+          "password": encryptedPassword,
+          "company name": companyName,
+          "verified": false
+        });
+        
+        // Redirect to /login after successful account creation
+        alert("Account created successfully!");
+        window.location.href = "/login";
+        
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        alert("Error creating account. Please try again.");
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>

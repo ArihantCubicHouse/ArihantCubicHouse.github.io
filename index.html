@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watchlist</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        
+        .footer a {
+            text-decoration: none;
+            color: #ffffff; /* Change text color to white for contrast */
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-size: 0.9em; /* Font size for mobile */
+            transition: color 0.3s;
+            flex: 1; /* Allow items to grow and fill space */
+            padding: 5px 0; /* Add padding for better tap targets */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            margin: 0;
+            padding-bottom: 60px; /* padding at bottom for footer */
+        }
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            background-color: #041e28;
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header-content {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        .header img {
+            width: 80px;
+            min-height:60px; 
+            margin-right: 15px;
+        }
+        .header h2 {
+            font-size: 1.4em;
+            margin: 0;
+        }
+        .search-bar {
+            margin-top: 10px;
+            margin-right: 20px;
+            align-self: center;
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 20px;
+            outline: none;
+            font-size: 1em;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .watchlist {
+            max-height: calc(100vh - 160px); /* Adjust for header and footer height */
+            overflow-y: auto;
+            margin-top: 100px; /* space for fixed header */
+            margin-bottom: 60px; /* space for fixed footer */
+            border-top: 1px solid #ddd;
+        }
+        .watchlist-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .watchlist-item:hover {
+            background-color: #f0f8ff;
+        }
+        .stock-name {
+            font-weight: bold;
+            color: #242424;
+        }
+
+        .footer {
+            margin-right: 20px;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: #041e28;
+            border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+        }
+        
+        .footer a:hover {
+            color: #ffffffb9;
+        }
+        .footer a .material-icons {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+        }
+
+        /* Mobile-specific styles */
+        @media (max-width: 600px) {
+            .header h2 {
+                font-size: 1.2em;
+            }
+            .search-bar {
+                font-size: 0.9em;
+                padding: 8px;
+            }
+            .footer a {
+                font-size: 0.8em;
+            }
+            .footer a .material-icons {
+                font-size: 1.3em;
+            }
+            .watchlist-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<script src="script.js" type="module"></script>p
+<div class="container">
+    <div class="header">
+        <div class="header-content">
+            <img src="image.jpg" alt="Logo"> <!-- Add your logo URL here -->
+            <h2>Arihant Cubic House</h2>
+        </div>
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search stocks...">
+    </div>
+
+    <div class="watchlist" id="watchlist">
+        <div class="watchlist-item">
+            <div class="stock-name">MQ</div>
+        </div>
+        <div class="watchlist-item">
+            <div class="stock-name">PS</div>
+        </div>
+        <div class="watchlist-item">
+            <div class="stock-name">OS</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <a href="#"><span class="material-icons">visibility</span> Watchlist</a>
+        <a href="#"><span class="material-icons">shopping_cart</span> Orders</a>
+        <a href="#"><span class="material-icons">account_balance</span> Cart</a>
+        <a href="#"><span class="material-icons">person   </span> Account</a>
+    </div>
+</div>
+
+<script>
+    // JavaScript for filtering the watchlist
+    document.getElementById('searchBar').addEventListener('input', function() {
+        const filter = this.value.toUpperCase();
+        const items = document.querySelectorAll('.watchlist-item');
+        
+        items.forEach(item => {
+            const stockName = item.querySelector('.stock-name').textContent;
+            if (stockName.toUpperCase().includes(filter)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
