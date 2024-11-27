@@ -6,7 +6,7 @@
   <title>Arihant Cubic House</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <style>
-    /* Your existing styles for the second template go here */
+    /* Add your styles here */
     :root {
       --primary-color: #4f46e5;
       --secondary-color: #6366f1;
@@ -31,180 +31,73 @@
       line-height: 1.5;
     }
 
-    .header {
-      background-color: var(--primary-color);
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: white;
-      text-decoration: none;
-    }
-
-    .logo img {
-      width: 2rem;
-      height: 2rem;
-      border-radius: 8px;
-    }
-
-    .logo span {
-      font-size: 1.25rem;
-      font-weight: 600;
-    }
-
-    .get-started {
-      background-color: white;
-      color: var(--primary-color);
-      padding: 0.625rem 1.25rem;
-      border-radius: 0.5rem;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .get-started:hover {
-      background-color: #f3f4f6;
-      transform: translateY(-1px);
-    }
-
-    .banner {
-      background-color: var(--secondary-color);
-      color: white;
-      padding: 0.75rem;
-      text-align: center;
-      font-size: 0.875rem;
-      animation: slideIn 0.5s ease-out;
-    }
-
-    .main-content {
-      max-width: 1200px;
-      margin: 1.5rem auto;
-      padding: 0 1rem;
-      margin-bottom: 5rem;
-    }
-
-    .search-container {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text-secondary);
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 0.75rem 1rem 0.75rem 2.5rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.5rem;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-
-    .stock-list {
-      display: grid;
-      gap: 0.75rem;
-      list-style: none;
-    }
-
-    .stock-item {
-      background-color: var(--surface-color);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: transform 0.2s;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .stock-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .stock-details {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .stock-symbol {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    .stock-name {
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-    }
-
-    .stock-price {
-      font-weight: 600;
-    }
-
-    /* Ensure mobile responsiveness */
-    @media (max-width: 600px) {
-      .search-input {
-        font-size: 0.9rem;
-      }
-    }
+    /* Add your other styles as needed */
   </style>
 </head>
 <body>
-  <div class="header">
+  <header class="header">
     <div class="header-content">
       <a href="#" class="logo">
-        <img src="image.jpg" alt="Logo">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=32&h=32&fit=crop&auto=format" alt="Arihant Cubic Logo">
         <span>Arihant Cubic House</span>
       </a>
+      <a href="#" class="get-started">Logout</a>
     </div>
+  </header>
+
+  <main class="main-content">
     <div class="search-container">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search stocks...">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search...............">
     </div>
-  </div>
 
-  <div class="main-content">
-    <h2>Stock Watchlist</h2>
-    <ul id="stockList" class="stock-list"></ul>
-  </div>
+    <ul class="stock-list">
+      <li class="stock-item">
+        <div class="stock-details">
+          <span class="stock-symbol">MQ</span>
+        </div>
+      </li>
+      <li class="stock-item">
+        <div class="stock-details">
+          <span class="stock-symbol">RQ</span>
+        </div>
+      </li>
+      <li class="stock-item">
+        <div class="stock-details">
+          <span class="stock-symbol">SQ</span>
+        </div>
+      </li>
+    </ul>
+  </main>
 
-  <div class="footer">
-    <a href="#">Watchlist</a>
-    <a href="#">Orders</a>
-    <a href="#">Cart</a>
-    <a href="#">Account</a>
-  </div>
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Your footer content here -->
+    </div>
+  </footer>
 
+  <!-- Add your Firebase SDKs and custom JavaScript at the end of the body -->
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
-  <script type="module">
+  <script>
+    // Function to get a cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Check if the 'id' cookie exists and redirect to login if it doesn't
+    if (!getCookie('id')) {
+      window.location.href = '/login'; 
+    }
+
+    // Get the user ID from the `id` cookie
+    const userId = getCookie("id");
+
     // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDZRW7hj5jtolyXijcMLG9QBnOvUZR5I-k",
@@ -216,25 +109,11 @@
       measurementId: "G-XKW570TWQG"
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    // Initialize Firebase and Firestore
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore(app);
 
-    // Function to get cookie by name
-    function getCookie(name) {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    // Check if 'id' cookie exists
-    if (!getCookie('id')) {
-      window.location.href = '/login';
-    }
-
-    const userId = getCookie("id");
-
-    // Check user verification status
+    // Function to check verification status and redirect if unverified
     async function checkVerificationStatus() {
       if (!userId) {
         window.location.href = "/login";
@@ -242,8 +121,9 @@
       }
 
       try {
-        const userDoc = await getDoc(doc(db, "users", userId));
-        if (userDoc.exists()) {
+        const userDoc = await firebase.firestore().doc("users/" + userId).get();
+
+        if (userDoc.exists) {
           const userData = userDoc.data();
           if (userData.verified === false) {
             window.location.href = "/unverified";
@@ -257,58 +137,57 @@
       }
     }
 
-    // Load stock data from Firestore
-    async function loadStocks() {
-      const stockList = document.getElementById("stockList");
-      stockList.innerHTML = "<li>Loading stocks...</li>";
+    // Run the verification check on page load
+    document.addEventListener('DOMContentLoaded', checkVerificationStatus);
+
+    // Function to load gems from Firestore and display in watchlist
+    async function loadGems() {
+      const watchlist = document.getElementById("watchlist");
+      watchlist.innerHTML = "<p>Loading gems...</p>";
 
       try {
-        const querySnapshot = await getDocs(collection(db, "stocks"));
-        stockList.innerHTML = "";
+        const querySnapshot = await firebase.firestore().collection("gems").get();
+        watchlist.innerHTML = "";
 
         querySnapshot.forEach((doc) => {
-          const stockName = doc.data().name;
-          const stockSymbol = doc.data().symbol;
-          const stockPrice = doc.data().price;
-
-          const stockItem = document.createElement("li");
-          stockItem.classList.add("stock-item");
-          stockItem.innerHTML = `
-            <div class="stock-details">
-              <div class="stock-symbol">${stockSymbol}</div>
-              <div class="stock-name">${stockName}</div>
-              <div class="stock-price">$${stockPrice}</div>
-            </div>
-          `;
-          stockItem.onclick = () => {
-            window.location.href = `/stocks/${doc.id}`;
-          };
-          stockList.appendChild(stockItem);
+          const gemName = doc.id;
+          const gemItem = document.createElement("div");
+          gemItem.classList.add("watchlist-item");
+          gemItem.innerHTML = `<div class="stock-name">${gemName}</div>`;
+          gemItem.addEventListener("click", () => loadSizes(gemName)); // Add click event
+          watchlist.appendChild(gemItem);
         });
       } catch (error) {
-        console.error("Error loading stocks:", error);
+        console.error("Error loading gems:", error);
+        watchlist.innerHTML = "<p>Error loading gems. Please try again later.</p>";
       }
     }
 
-    // Handle search functionality
-    const searchInput = document.getElementById("searchInput");
-    searchInput.addEventListener("input", function () {
-      const searchQuery = searchInput.value.toLowerCase();
-      const items = document.querySelectorAll(".stock-item");
+    // Function to load sizes for a specific gem from Firestore and display in watchlist
+    async function loadSizes(gemName) {
+      const watchlist = document.getElementById("watchlist");
+      watchlist.innerHTML = `<p>Loading sizes for ${gemName}...</p>`;
 
-      items.forEach((item) => {
-        const stockName = item.querySelector(".stock-name").textContent.toLowerCase();
-        if (stockName.includes(searchQuery)) {
-          item.style.display = "flex";
-        } else {
-          item.style.display = "none";
-        }
-      });
-    });
+      try {
+        const sizesCollection = firebase.firestore().collection("gems").doc(gemName).collection("sizes");
+        const querySnapshot = await sizesCollection.get();
+        watchlist.innerHTML = "";
 
-    // Load stocks and check verification on page load
-    loadStocks();
-    checkVerificationStatus();
+        querySnapshot.forEach((doc) => {
+          const size = doc.data().size;
+          const sizeItem = document.createElement("div");
+          sizeItem.classList.add("size-item");
+          sizeItem.innerHTML = `<div class="size-name">${size}</div>`;
+          watchlist.appendChild(sizeItem);
+        });
+      } catch (error) {
+        console.error("Error loading sizes:", error);
+        watchlist.innerHTML = "<p>Error loading sizes. Please try again later.</p>";
+      }
+    }
+
+    // Optionally, call loadGems on page load to populate the gems list
+    document.addEventListener('DOMContentLoaded', loadGems);
   </script>
 </body>
 </html>
