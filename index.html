@@ -1,177 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watchlist</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        /* Base Styles */
-        
-        .footer a {
-            text-decoration: none;
-            color: #ffffff; /* Change text color to white for contrast */
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            font-size: 0.9em; /* Font size for mobile */
-            transition: color 0.3s;
-            flex: 1; /* Allow items to grow and fill space */
-            padding: 5px 0; /* Add padding for better tap targets */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arihant Cubic House</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    /* CSS styles here (same as provided in your original code) */
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #6366f1;
+      --success-color: #22c55e;
+      --danger-color: #ef4444;
+      --background-color: #f9fafb;
+      --surface-color: #ffffff;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            color: #333;
-            margin: 0;
-            padding-bottom: 60px; /* padding at bottom for footer */
-        }
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-            background-color: #041e28;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-        }
-        .header img {
-            width: 80px;
-            min-height:60px; 
-            margin-right: 15px;
-        }
-        .header h2 {
-            font-size: 1.4em;
-            margin: 0;
-        }
-        .search-bar {
-            margin-top: 10px;
-            margin-right: 20px;
-            align-self: center;
-            padding: 10px;
-            width: 90%;
-            border: none;
-            border-radius: 20px;
-            outline: none;
-            font-size: 1em;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .watchlist {
-            max-height: calc(100vh - 160px); /* Adjust for header and footer height */
-            overflow-y: auto;
-            margin-top: 100px; /* space for fixed header */
-            margin-bottom: 60px; /* space for fixed footer */
-            border-top: 1px solid #ddd;
-        }
-        .watchlist-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        .watchlist-item:hover {
-            background-color: #f0f8ff;
-        }
-        .stock-name {
-            font-weight: bold;
-            color: #242424;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .footer {
-            margin-right: 20px;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            background-color: #041e28;
-            border-top: 1px solid #ddd;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-        
-        .footer a:hover {
-            color: #ffffffb9;
-        }
-        .footer a .material-icons {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-        /* Mobile-specific styles */
-        @media (max-width: 600px) {
-            .header h2 {
-                font-size: 1.2em;
-            }
-            .search-bar {
-                font-size: 0.9em;
-                padding: 8px;
-            }
-            .footer a {
-                font-size: 0.8em;
-            }
-            .footer a .material-icons {
-                font-size: 1.3em;
-            }
-            .watchlist-item {
-                padding: 12px;
-            }
-        }
-    </style>
+    .header {
+      background-color: var(--primary-color);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 8px;
+    }
+
+    .logo span {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .get-started {
+      background-color: white;
+      color: var(--primary-color);
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .get-started:hover {
+      background-color: #f3f4f6;
+      transform: translateY(-1px);
+    }
+
+    .banner {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.875rem;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      margin-bottom: 5rem;
+    }
+
+    .search-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .stock-list {
+      display: grid;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .stock-item {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .stock-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .stock-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stock-symbol {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .stock-name {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .stock-price {
+      font-weight: 600;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+    }
+
+    .price-positive {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--success-color);
+    }
+
+    .price-negative {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: var(--danger-color);
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: var(--surface-color);
+      border-top: 1px solid #e5e7eb;
+      padding: 0.75rem 0;
+      z-index: 50;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .footer-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.375rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-item:hover {
+      color: var(--primary-color);
+    }
+
+    .footer-icon {
+      font-size: 1.25rem;
+    }
+
+    .footer-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-content {
+        padding: 0 1rem;
+      }
+
+      .logo span {
+        font-size: 1rem;
+      }
+
+      .get-started {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+
+      .stock-item {
+        padding: 0.75rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<script src="script.js" type="module"></script>p
-<div class="container">
-    <div class="header">
-        <div class="header-content">
-            <img src="image.jpg" alt="Logo"> <!-- Add your logo URL here -->
-            <h2>Arihant Cubic House</h2>
-        </div>
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search stocks...">
+  <header class="header">
+    <div class="header-content">
+      <a href="#" class="logo">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=32&h=32&fit=crop&auto=format" alt="Arihant Cubic Logo">
+        <span>Arihant Cubic House</span>
+      </a>
+      <a href="#" class="get-started">Logout</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="search-container">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" class="search-input" placeholder="Search...............">
     </div>
 
-    <div class="watchlist" id="watchlist">
-
+    <div id="watchlist" class="stock-list">
+      <!-- Gems will be dynamically loaded here -->
     </div>
+  </main>
 
-    <div class="footer">
-        <a href="#"><span class="material-icons">visibility</span> Watchlist</a>
-        <a href="#"><span class="material-icons">shopping_cart</span> Orders</a>
-        <a href="#"><span class="material-icons">account_balance</span> Cart</a>
-        <a href="#"><span class="material-icons">person   </span> Account</a>
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- Footer items here -->
     </div>
-</div>
+  </footer>
 
-<script>
-    // JavaScript for filtering the watchlist
-    document.getElementById('searchBar').addEventListener('input', function() {
-        const filter = this.value.toUpperCase();
-        const items = document.querySelectorAll('.watchlist-item');
-        
-        items.forEach(item => {
-            const stockName = item.querySelector('.stock-name').textContent;
-            if (stockName.toUpperCase().includes(filter)) {
-                item.style.display = '';
+  <script type="module">
+    // Function to get a cookie by name
+    function getCookie(name) {
+        const value = ; ${document.cookie};
+        const parts = value.split(; ${name}=);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Check if the 'id' cookie exists and redirect to login if it doesn't
+    if (!getCookie('id')) {
+        window.location.href = '/login'; 
+    }
+
+    // Get the user ID from the id cookie
+    const userId = getCookie("id");
+
+    // Import Firebase SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    // Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDZRW7hj5jtolyXijcMLG9QBnOvUZR5I-k",
+        authDomain: "arihantcubichouse1001.firebaseapp.com",
+        projectId: "arihantcubichouse1001",
+        storageBucket: "arihantcubichouse1001.appspot.com",
+        messagingSenderId: "916505919065",
+        appId: "1:916505919065:web:c9fe9cad2d0719d64ebb48",
+        measurementId: "G-XKW570TWQG"
+    };
+
+    // Initialize Firebase and Firestore
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Function to check verification status and redirect if unverified
+    async function checkVerificationStatus() {
+        if (!userId) {
+            window.location.href = "/login";
+            return;
+        }
+
+        try {
+            const userDoc = await getDoc(doc(db, "users", userId));
+
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+
+                if (userData.verified === false) {
+                    window.location.href = "/unverified";
+                }
             } else {
-                item.style.display = 'none';
+                console.error("User document not found.");
+                window.location.href = "/login";
             }
-        });
-    });
-</script>
+        } catch (error) {
+            console.error("Error checking verification status:", error);
+        }
+    }
 
+    // Run the verification check on page load
+    checkVerificationStatus();
+
+    // Function to load gems from Firestore and display in watchlist
+    async function loadGems() {
+        const watchlist = document.getElementById("watchlist");
+        watchlist.innerHTML = "<p>Loading gems...</p>";
+
+        try {
+            const querySnapshot = await getDocs(collection(db, "gems"));
+            watchlist.innerHTML = "";
+
+            querySnapshot.forEach((doc) => {
+                const gemName = doc.id;
+                const gemItem = document.createElement("div");
+                gemItem.classList.add("stock-item");
+                gemItem.innerHTML = <div class="stock-name">${gemName}</div>;
+                gemItem.addEventListener("click", () => loadSizes(gemName)); // Add click event
+                watchlist.appendChild(gemItem);
+            });
+        } catch (error) {
+            console.error("Error loading gems:", error);
+            watchlist.innerHTML = "<p>Error loading gems. Please try again later.</p>";
+        }
+    }
+
+    // Function to load sizes for a specific gem from Firestore and display in watchlist
+    async function loadSizes(gemName) {
+        const watchlist = document.getElementById("watchlist");
+        watchlist.innerHTML = <p>Loading sizes for ${gemName}...</p>;
+
+        try {
+            const sizesCollection = collection(db, "gems", gemName, "sizes");
+            const querySnapshot = await getDocs(sizesCollection);
+            watchlist.innerHTML = "";
+
+            querySnapshot.forEach((doc) => {
+                const sizeName = doc.id;
+                const sizeItem = document.createElement("div");
+                sizeItem.classList.add("stock-item");
+                sizeItem.innerHTML = <div class="stock-name">${sizeName}</div>;
+                watchlist.appendChild(sizeItem);
+            });
+        } catch (error) {
+            console.error("Error loading sizes:", error);
+            watchlist.innerHTML = <p>Error loading sizes for ${gemName}. Please try again later.</p>;
+        }
+    }
+
+    // Load gems on page load
+    loadGems();
+  </script>
 </body>
 </html>
