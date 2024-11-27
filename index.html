@@ -1,177 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watchlist</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-        /* Base Styles */
-        
-        .footer a {
-            text-decoration: none;
-            color: #ffffff; /* Change text color to white for contrast */
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            font-size: 0.9em; /* Font size for mobile */
-            transition: color 0.3s;
-            flex: 1; /* Allow items to grow and fill space */
-            padding: 5px 0; /* Add padding for better tap targets */
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arihant Cubic House</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    /* Your existing styles for the second template go here */
+    :root {
+      --primary-color: #4f46e5;
+      --secondary-color: #6366f1;
+      --success-color: #22c55e;
+      --danger-color: #ef4444;
+      --background-color: #f9fafb;
+      --surface-color: #ffffff;
+      --text-primary: #111827;
+      --text-secondary: #6b7280;
+    }
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f3f4f6;
-            color: #333;
-            margin: 0;
-            padding-bottom: 60px; /* padding at bottom for footer */
-        }
-        .header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 15px;
-            background-color: #041e28;
-            color: #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            margin-right: 20px;
-        }
-        .header img {
-            width: 80px;
-            min-height:60px; 
-            margin-right: 15px;
-        }
-        .header h2 {
-            font-size: 1.4em;
-            margin: 0;
-        }
-        .search-bar {
-            margin-top: 10px;
-            margin-right: 20px;
-            align-self: center;
-            padding: 10px;
-            width: 90%;
-            border: none;
-            border-radius: 20px;
-            outline: none;
-            font-size: 1em;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .watchlist {
-            max-height: calc(100vh - 160px); /* Adjust for header and footer height */
-            overflow-y: auto;
-            margin-top: 100px; /* space for fixed header */
-            margin-bottom: 60px; /* space for fixed footer */
-            border-top: 1px solid #ddd;
-        }
-        .watchlist-item {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        .watchlist-item:hover {
-            background-color: #f0f8ff;
-        }
-        .stock-name {
-            font-weight: bold;
-            color: #242424;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .footer {
-            margin-right: 20px;
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            background-color: #041e28;
-            border-top: 1px solid #ddd;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-        
-        .footer a:hover {
-            color: #ffffffb9;
-        }
-        .footer a .material-icons {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
 
-        /* Mobile-specific styles */
-        @media (max-width: 600px) {
-            .header h2 {
-                font-size: 1.2em;
-            }
-            .search-bar {
-                font-size: 0.9em;
-                padding: 8px;
-            }
-            .footer a {
-                font-size: 0.8em;
-            }
-            .footer a .material-icons {
-                font-size: 1.3em;
-            }
-            .watchlist-item {
-                padding: 12px;
-            }
-        }
-    </style>
+    .header {
+      background-color: var(--primary-color);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 8px;
+    }
+
+    .logo span {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .get-started {
+      background-color: white;
+      color: var(--primary-color);
+      padding: 0.625rem 1.25rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .get-started:hover {
+      background-color: #f3f4f6;
+      transform: translateY(-1px);
+    }
+
+    .banner {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.875rem;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 1.5rem auto;
+      padding: 0 1rem;
+      margin-bottom: 5rem;
+    }
+
+    .search-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .stock-list {
+      display: grid;
+      gap: 0.75rem;
+      list-style: none;
+    }
+
+    .stock-item {
+      background-color: var(--surface-color);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .stock-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .stock-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stock-symbol {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .stock-name {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+    }
+
+    .stock-price {
+      font-weight: 600;
+    }
+
+    /* Ensure mobile responsiveness */
+    @media (max-width: 600px) {
+      .search-input {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<script src="script.js" type="module"></script>p
-<div class="container">
-    <div class="header">
-        <div class="header-content">
-            <img src="image.jpg" alt="Logo"> <!-- Add your logo URL here -->
-            <h2>Arihant Cubic House</h2>
-        </div>
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search stocks...">
+  <div class="header">
+    <div class="header-content">
+      <a href="#" class="logo">
+        <img src="image.jpg" alt="Logo">
+        <span>Arihant Cubic House</span>
+      </a>
     </div>
-
-    <div class="watchlist" id="watchlist">
-
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search stocks...">
     </div>
+  </div>
 
-    <div class="footer">
-        <a href="#"><span class="material-icons">visibility</span> Watchlist</a>
-        <a href="#"><span class="material-icons">shopping_cart</span> Orders</a>
-        <a href="#"><span class="material-icons">account_balance</span> Cart</a>
-        <a href="#"><span class="material-icons">person   </span> Account</a>
-    </div>
-</div>
+  <div class="main-content">
+    <h2>Stock Watchlist</h2>
+    <ul id="stockList" class="stock-list"></ul>
+  </div>
 
-<script>
-    // JavaScript for filtering the watchlist
-    document.getElementById('searchBar').addEventListener('input', function() {
-        const filter = this.value.toUpperCase();
-        const items = document.querySelectorAll('.watchlist-item');
-        
-        items.forEach(item => {
-            const stockName = item.querySelector('.stock-name').textContent;
-            if (stockName.toUpperCase().includes(filter)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
+  <div class="footer">
+    <a href="#">Watchlist</a>
+    <a href="#">Orders</a>
+    <a href="#">Cart</a>
+    <a href="#">Account</a>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js"></script>
+  <script type="module">
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDZRW7hj5jtolyXijcMLG9QBnOvUZR5I-k",
+      authDomain: "arihantcubichouse1001.firebaseapp.com",
+      projectId: "arihantcubichouse1001",
+      storageBucket: "arihantcubichouse1001.appspot.com",
+      messagingSenderId: "916505919065",
+      appId: "1:916505919065:web:c9fe9cad2d0719d64ebb48",
+      measurementId: "G-XKW570TWQG"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Function to get cookie by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    // Check if 'id' cookie exists
+    if (!getCookie('id')) {
+      window.location.href = '/login';
+    }
+
+    const userId = getCookie("id");
+
+    // Check user verification status
+    async function checkVerificationStatus() {
+      if (!userId) {
+        window.location.href = "/login";
+        return;
+      }
+
+      try {
+        const userDoc = await getDoc(doc(db, "users", userId));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.verified === false) {
+            window.location.href = "/unverified";
+          }
+        } else {
+          console.error("User document not found.");
+          window.location.href = "/login";
+        }
+      } catch (error) {
+        console.error("Error checking verification status:", error);
+      }
+    }
+
+    // Load stock data from Firestore
+    async function loadStocks() {
+      const stockList = document.getElementById("stockList");
+      stockList.innerHTML = "<li>Loading stocks...</li>";
+
+      try {
+        const querySnapshot = await getDocs(collection(db, "stocks"));
+        stockList.innerHTML = "";
+
+        querySnapshot.forEach((doc) => {
+          const stockName = doc.data().name;
+          const stockSymbol = doc.data().symbol;
+          const stockPrice = doc.data().price;
+
+          const stockItem = document.createElement("li");
+          stockItem.classList.add("stock-item");
+          stockItem.innerHTML = `
+            <div class="stock-details">
+              <div class="stock-symbol">${stockSymbol}</div>
+              <div class="stock-name">${stockName}</div>
+              <div class="stock-price">$${stockPrice}</div>
+            </div>
+          `;
+          stockItem.onclick = () => {
+            window.location.href = `/stocks/${doc.id}`;
+          };
+          stockList.appendChild(stockItem);
         });
-    });
-</script>
+      } catch (error) {
+        console.error("Error loading stocks:", error);
+      }
+    }
 
+    // Handle search functionality
+    const searchInput = document.getElementById("searchInput");
+    searchInput.addEventListener("input", function () {
+      const searchQuery = searchInput.value.toLowerCase();
+      const items = document.querySelectorAll(".stock-item");
+
+      items.forEach((item) => {
+        const stockName = item.querySelector(".stock-name").textContent.toLowerCase();
+        if (stockName.includes(searchQuery)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+
+    // Load stocks and check verification on page load
+    loadStocks();
+    checkVerificationStatus();
+  </script>
 </body>
 </html>
