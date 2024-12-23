@@ -83,56 +83,24 @@ async function loadGems() {
     }
 }
 
-// Function to load sizes and colors for a specific gem from Firestore and display in watchlist
+// Function to load sizes for a specific gem from Firestore and display in watchlist
 async function loadSizes(gemName) {
     const watchlist = document.getElementById("watchlist");
-    watchlist.innerHTML = `<p>Loading sizes and colors for ${gemName}...</p>`;
+    watchlist.innerHTML = `<p>Loading sizes for ${gemName}...</p>`;
 
     try {
         const sizesCollection = collection(db, "gems", gemName, "sizes");
         const querySnapshot = await getDocs(sizesCollection);
         watchlist.innerHTML = "";
 
-        // Iterate through each size document
-        for (const doc of querySnapshot.docs) {
+        querySnapshot.forEach((doc) => {
             const sizeName = doc.id;
             const sizeItem = document.createElement("div");
             sizeItem.classList.add("watchlist-item");
             sizeItem.innerHTML = `<div class="stock-name">${sizeName}</div>`;
-
-            // Now load the colors for this size
-            const colorsCollection = collection(db, "colors"); // Colors are in a separate collection
-            const colorsSnapshot = await getDocs(colorsCollection);
-            const colors = [];
-
-            colorsSnapshot.forEach(colorDoc => {
-                const colorName = colorDoc.id; // Assuming the document ID represents the color name
-                colors.push(colorName);
-            });
-
-            // Display the colors
-            if (colors.length > 0) {
-                const colorsContainer = document.createElement("div");
-                colorsContainer.classList.add("colors-container");
-
-                colors.forEach(color => {
-                    const colorItem = document.createElement("span");
-                    colorItem.classList.add("color-item");
-                    colorItem.style.backgroundColor = color; // Assuming color is a valid CSS color
-                    colorItem.title = color; // Display the color name on hover
-                    colorsContainer.appendChild(colorItem);
-                });
-
-                sizeItem.appendChild(colorsContainer);
-            } else {
-                const noColors = document.createElement("div");
-                noColors.innerText = "No colors available";
-                sizeItem.appendChild(noColors);
-            }
-
-            // Append the size item to the watchlist
+            // You can add another event listener here for further navigation if needed
             watchlist.appendChild(sizeItem);
-        }
+        });
     } catch (error) {
         console.error(`Error loading sizes for ${gemName}:`, error);
         watchlist.innerHTML = `<p>Error loading sizes for ${gemName}. Please try again later.</p>`;
@@ -155,4 +123,6 @@ document.getElementById('searchBar').addEventListener('input', function() {
             item.style.display = 'none';
         }
     });
-});
+}); 
+
+in the code add for colors which is present I the database 
