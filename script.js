@@ -124,5 +124,3 @@ document.getElementById('searchBar').addEventListener('input', function() {
         }
     });
 }); 
-
-in the code add for colors which is present I the database 
