@@ -5,7 +5,7 @@ function getCookie(name) {
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-// Check if the 'id' cookie exists and redirect to login if it doesn't
+// Check if the 'id' cookie exists and redirect to login if it doesn't 
 if (!getCookie('id')) {
     window.location.href = '/login';
 }
@@ -216,4 +216,4 @@ document.getElementById('searchBar').addEventListener('input', function() {
             item.style.display = 'none';
         }
     });
-});
+}); 
