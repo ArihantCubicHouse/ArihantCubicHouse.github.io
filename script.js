@@ -7,7 +7,7 @@ function getCookie(name) {
 
 // Check if the 'id' cookie exists and redirect to login if it doesn't
 if (!getCookie('id')) {
-    window.location.href = '/login'; 
+    window.location.href = '/login';
 }
 
 // Get the user ID from the `id` cookie
@@ -15,7 +15,7 @@ const userId = getCookie("id");
 
 // Import Firebase SDKs
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -98,12 +98,105 @@ async function loadSizes(gemName) {
             const sizeItem = document.createElement("div");
             sizeItem.classList.add("watchlist-item");
             sizeItem.innerHTML = `<div class="stock-name">${sizeName}</div>`;
-            // You can add another event listener here for further navigation if needed
+            sizeItem.addEventListener("click", () => loadColors(gemName, sizeName)); // Load colors after size selection
             watchlist.appendChild(sizeItem);
         });
     } catch (error) {
         console.error(`Error loading sizes for ${gemName}:`, error);
         watchlist.innerHTML = `<p>Error loading sizes for ${gemName}. Please try again later.</p>`;
+    }
+}
+
+// Function to load colors for a specific gem and size from Firestore
+async function loadColors(gemName, sizeName) {
+    const watchlist = document.getElementById("watchlist");
+    watchlist.innerHTML = `<p>Loading colors for ${sizeName}...</p>`;
+
+    try {
+        const colorsCollection = collection(db, "colors");
+        const querySnapshot = await getDocs(colorsCollection);
+        watchlist.innerHTML = "";
+
+        querySnapshot.forEach((doc) => {
+            const colorName = doc.id;
+            const colorItem = document.createElement("div");
+            colorItem.classList.add("watchlist-item");
+            colorItem.innerHTML = `<div class="stock-name">${colorName}</div>`;
+            colorItem.addEventListener("click", () => chooseQuantity(gemName, sizeName, colorName)); // Choose quantity after color selection
+            watchlist.appendChild(colorItem);
+        });
+    } catch (error) {
+        console.error(`Error loading colors for ${sizeName}:`, error);
+        watchlist.innerHTML = `<p>Error loading colors for ${sizeName}. Please try again later.</p>`;
+    }
+}
+
+// Function to choose quantity after selecting a color
+function chooseQuantity(gemName, sizeName, colorName) {
+    const watchlist = document.getElementById("watchlist");
+    watchlist.innerHTML = `
+        <p>Choose quantity for ${colorName} ${sizeName} ${gemName}:</p>
+        <button id="btn-1000">1000</button>
+        <button id="btn-2000">2000</button>
+        <button id="btn-3000">3000</button>
+        <button id="btn-5000">5000</button>
+        <button id="btn-custom">Custom</button>
+    `;
+
+    // Add event listeners for the quantity buttons
+    document.getElementById("btn-1000").addEventListener("click", function() {
+        submitOrder(gemName, sizeName, colorName, 1000);
+    });
+
+    document.getElementById("btn-2000").addEventListener("click", function() {
+        submitOrder(gemName, sizeName, colorName, 2000);
+    });
+
+    document.getElementById("btn-3000").addEventListener("click", function() {
+        submitOrder(gemName, sizeName, colorName, 3000);
+    });
+
+    document.getElementById("btn-5000").addEventListener("click", function() {
+        submitOrder(gemName, sizeName, colorName, 5000);
+    });
+
+    document.getElementById("btn-custom").addEventListener("click", function() {
+        customQuantity(gemName, sizeName, colorName);
+    });
+}
+
+// Function to handle custom quantity input
+function customQuantity(gemName, sizeName, colorName) {
+    const quantity = prompt("Enter custom quantity:");
+    if (quantity && !isNaN(quantity) && quantity > 0) {
+        submitOrder(gemName, sizeName, colorName, parseInt(quantity));
+    } else {
+        alert("Please enter a valid number for quantity.");
+    }
+}
+
+// Function to submit the order to Firestore
+async function submitOrder(gemName, sizeName, colorName, quantity) {
+    try {
+        const orderRef = collection(db, "orders");
+
+        const newOrder = {
+            gemName,
+            sizeName,
+            colorName,
+            quantity,
+            userId, // Assuming the user ID is stored in a cookie or session
+            timestamp: new Date().toISOString(),
+        };
+
+        await addDoc(orderRef, newOrder);
+
+        alert("Order successfully placed!");
+        // Optionally, you can redirect the user to a confirmation page or clear the watchlist
+        // window.location.href = "/order-confirmation";
+    } catch (error) {
+        console.error("Error placing order:", error);
+        alert("Error placing order. Please try again later.");
     }
 }
 
