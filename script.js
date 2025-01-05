@@ -132,36 +132,44 @@ async function loadColors(gemName, sizeName) {
 }
 
 // Function to choose quantity after selecting a color
+// Function to choose quantity after selecting a color
 function chooseQuantity(gemName, sizeName, colorName) {
     const watchlist = document.getElementById("watchlist");
     watchlist.innerHTML = `
-        <p>Choose quantity for ${colorName} ${sizeName} ${gemName}:</p>
-        <button id="btn-1000">1000</button>
-        <button id="btn-2000">2000</button>
-        <button id="btn-3000">3000</button>
-        <button id="btn-5000">5000</button>
-        <button id="btn-custom">Custom</button>
+    <div class="content">
+        <h2>Choose quantity for ${colorName} ${sizeName} ${gemName}:</h2>
+        <div class="dropdown-container">
+            <select id="quantity-select" onchange="handleSelectChange(this.value)">
+                <option value="1000">1000</option>
+                <option value="2000">2000</option>
+                <option value="3000">3000</option>
+                <option value="5000">5000</option>
+                <option value="custom">Custom</option>
+            </select>
+            <input type="number" id="custom-input" placeholder="Enter custom quantity" min="1" style="display: none;">
+            <button id="submit-btn" class="btn">Continue</button>
+        </div>
+    </div>
     `;
 
-    // Add event listeners for the quantity buttons
-    document.getElementById("btn-1000").addEventListener("click", function() {
-        submitOrder(gemName, sizeName, colorName, 1000);
-    });
+    // Add event listener to the "Continue" button
+    document.getElementById("submit-btn").addEventListener("click", function () {
+        const selectElement = document.getElementById("quantity-select");
+        const selectedValue = selectElement.value;
 
-    document.getElementById("btn-2000").addEventListener("click", function() {
-        submitOrder(gemName, sizeName, colorName, 2000);
-    });
+        // If "Custom" is selected, get the value from the custom input field
+        let quantity = selectedValue === "custom"
+            ? parseInt(document.getElementById("custom-input").value, 10)
+            : parseInt(selectedValue, 10);
 
-    document.getElementById("btn-3000").addEventListener("click", function() {
-        submitOrder(gemName, sizeName, colorName, 3000);
-    });
+        // Validate the quantity
+        if (!quantity || quantity <= 0) {
+            alert("Please enter a valid quantity.");
+            return;
+        }
 
-    document.getElementById("btn-5000").addEventListener("click", function() {
-        submitOrder(gemName, sizeName, colorName, 5000);
-    });
-
-    document.getElementById("btn-custom").addEventListener("click", function() {
-        customQuantity(gemName, sizeName, colorName);
+        // Call the submitOrder function
+        submitOrder(gemName, sizeName, colorName, quantity);
     });
 }
 
